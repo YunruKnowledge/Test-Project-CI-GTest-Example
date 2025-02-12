@@ -1,0 +1,22 @@
+name: Test Status
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installing dependecies
+        run: sudo apt-get install build-essential cmake python3-dev libgtest-dev
+
+      - name: Compile w/ cmake & run test
+        run: |
+          mkdir -p build && cd build
+          cmake .. && make && ./run_test &&  make test
