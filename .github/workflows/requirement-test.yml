@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Installing dependecies
-        run: sudo apt-get install build-essential cmake python3-dev libgtest-dev
+        run: sudo apt-get install build-essential cmake python3-dev libgtest-dev libgmock-dev
 
       - name: Compile w/ cmake & run test
         run: |
