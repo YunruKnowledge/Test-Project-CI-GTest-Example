@@ -9,7 +9,7 @@
 class IMemory {
 public:
   virtual void *malloc(const size_t _size) = 0;
-  virtual void *free(void *_ptr) = 0;
+  virtual void free(void *_ptr) = 0;
 };
 
 template <typename T> class Queue {
