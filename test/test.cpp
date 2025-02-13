@@ -56,9 +56,23 @@ template <typename T> class QueueFixture : public ::testing::Test {
 protected:
   const std::vector<T> values{std::get<std::vector<T>>(allValues)};
 
-  void SetUp(void) override {}
+  NiceMock<MockMemory> mock;
+  Queue<T> temp_queue{mock};
 
-  void TearDown(void) override {}
+  void SetUp(void) override {
+    ON_CALL(mock, malloc(_))
+        .WillByDefault(Invoke(&mock, &MockMemory::allocate));
+
+    ON_CALL(mock, free(_)).WillByDefault(Invoke(&mock, &MockMemory::release));
+
+    for (size_t i = 1; i <= values.size(); i++) {
+      EXPECT_TRUE(temp_queue.enqueue(values[i - 1]));
+      std::cout << values[i - 1] << " - ";
+    }
+    std::cout << std::endl;
+  }
+
+  void TearDown(void) override { temp_queue.~Queue(); }
 };
 
 using Types = ::testing::Types<int, float, std::string>;
