@@ -34,17 +34,17 @@ public:
   Queue &operator=(const Queue &) = delete;
 
   // MOVE
-  Queue(Queue &&_inst) noexcept;
-  Queue &operator=(Queue &&_inst) noexcept;
+  Queue(Queue &&_inst) noexcept {};
+  Queue &operator=(Queue &&_inst) noexcept {};
 
 public:
-  bool enqueue(const T &_value);
+  bool enqueue(const T &_value) {};
 
-  bool dequeue(T &_var);
+  bool dequeue(T &_var) {};
 
-  size_t amount(void);
+  size_t amount(void) {};
 
-  void clear(void);
+  void clear(void) {};
 };
 
 #endif
